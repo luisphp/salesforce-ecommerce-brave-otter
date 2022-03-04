@@ -110,7 +110,7 @@ public class DropBoxConnetion {
         +'}';
         req.setBody(bodyGenerateSharedLink);
         req.setHeader('Content-Type','application/json');
-        req.setHeader('Authorization', 'Bearer ZMDjCFRquLcAAAAAAAAAAdtOakbbQBnf8ZOsaW_Lz-KVAn9A7qf85on7zISk-n_x');
+        //req.setHeader('Authorization', 'Bearer *******');
         req.setMethod('POST');
         req.setEndpoint('https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings');
         req.setTimeout(120000);
