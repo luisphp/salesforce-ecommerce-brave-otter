@@ -1,0 +1,166 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+<!--     
+        <div class="slds-card__header slds-grid slds-col">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate"> -->
+                <article class="slds-card">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-3 slds-var-p-around_small">
+                            <lightning-card title="All products" >
+                                <ul class="slds-var-m-around_medium">
+                                    <template for:each={products} for:item="product">
+                                        <li key={product.Id}>
+                                            <article class="slds-card">
+                                                <div class="slds-card__header slds-grid">
+                                                  <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                    <div class="slds-media__figure">
+                                                        <!-- Product Image -->
+                                                        {product.Product2.Name}
+                                                    </div>
+                                                    <div class="slds-media__body">
+
+                                                      <h2 class="slds-card__header-title"></h2>
+
+                                                      <!-- lightning button for open modal window -->
+                                                      <lightning-button variant="brand"
+                                                      label="Show Details"
+                                                      title="Show Details"
+                                                      onclick={openModal}
+                                                      class="slds-m-left_x-small"
+                                                      data-id={product.Product2.Id}
+                                                      data-name={product.Product2.Name}
+                                                      data-price={product.UnitPrice}
+                                                      data-description={product.Product2.Description}
+                                                      data-imageurl={product.Product2.image_url__c}>
+                                                      </lightning-button>   
+
+                                                    </div>
+                                                  </header>
+                                                </div>
+                                              </article>
+                                           
+                                        </li>
+                                    </template>
+                                </ul>
+                            </lightning-card>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-var-p-around_small">
+                        <span>Cart Here</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="slds-card">
+                  <div class="slds-card__header slds-grid">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                      <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-account" title="account">
+                          <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                          </svg>
+                          <span class="slds-assistive-text">account</span>
+                        </span>
+                      </div>
+                      <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                          <a href="#" class="slds-card__header-link slds-truncate" title="Accounts">
+                            <span>Accounts</span>
+                          </a>
+                        </h2>
+                      </div>
+                    </header>
+                  </div>
+                </article>
+            <!-- </header>
+        </div> -->
+        <!-- <lightning-card title="All products" >
+            <ul class="slds-var-m-around_medium">
+                <template for:each={products} for:item="product">
+                    <li key={product.Id}>
+                        {product.Name}
+                    </li>
+                </template>
+            </ul>
+        </lightning-card> -->
+        <!--Use template if:true to display/hide popup based on isModalOpen value--> 
+    <template if:true={isModalOpen}>
+
+        <!-- Modal/Popup Box LWC starts here -->
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+
+            <div class="slds-modal__container">
+
+              <header class="slds-modal__header">
+
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                  <span class="slds-assistive-text">Close</span>
+                </button>
+
+                <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{selectedProductName}</h2>
+
+                <p class="slds-m-top_x-small">
+                    <strong>Price: $ </strong> {selectedProductPrice}
+                </p>
+
+              </header>
+
+
+              <div class="slds-modal__content slds-p-around_medium slds-grid " id="modal-content-id-1">
+
+                <div class="slds-col slds-size_1-of-2">
+                    <!-- <div class="slds-text-heading_medium">Image</div> -->
+                    <img class="image_size_control slds-card" src={selectedProductImage}>
+                </div>
+
+                <div class="slds-col slds-size_1-of-2">
+                  <strong>Description: </strong> <p>{selectedProductDescription}</p>
+                </div>
+                
+              </div>
+
+
+              <footer class="slds-modal__footer">
+
+                <div class="slds-grid slds-gutters">
+
+                  <div class="slds-col slds-size_1-of-3">
+                    <!-- Input quantity -->
+                    <lightning-combobox
+                    class="slds-var-m-top_medium slds-align_absolute-center"
+                    name="Quantity"
+                    label="Select a Breed to see the cat details"
+                    value={selectedQuantity}
+                    placeholder="Select quantity"
+                    options={AvailableStock}
+                    onchange={quantitySelectedEvent} ></lightning-combobox>
+                  </div>
+
+                  <div class="slds-col slds-size_1-of-3">
+                    <button 
+                    class="slds-button slds-button_brand slds-align_absolute-center" 
+                    onclick={addToCart}
+                    >Add to Cart</button>
+                  </div>
+
+                  <div class="slds-col slds-size_1-of-3">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancel</button>
+                  </div>
+
+                </div>
+                
+                <!-- <button class="slds-button slds-button_brand" onclick={submitDetails}>Save</button> -->
+                <!-- <button class="slds-button slds-button_brand" onclick={submitDetails}>Save</button> -->
+              </footer>
+
+            </div>
+
+          </section>
+
+          <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+
+
+</template>

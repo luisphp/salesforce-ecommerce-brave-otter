@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="HelloWorld" icon-name="custom:custom14">
+      <div class="slds-m-around_medium">
+        <p>Hello, {greeting}!</p>
+        <lightning-input label="Name" value={greeting} onchange={changeHandler}></lightning-input>
+      </div>
+    </lightning-card>
+    <br>
+    <lightning-card title="Shiny Bike" icon-name="">
+      <div class="slds-m-around_medium">
+      <div id="waiting" if:false={ready}>Loading…</div>
+      <div if:false={ready} class="exampleHolder">
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+      </div>
+      <div id="display" if:true={ready}>
+          <div>Name: {name}</div>
+          <div>Description: {description}</div>
+          <div>Category: {category}</div>
+          <div>Material: {material}</div>
+          <div>Price: {price}</div>
+          <div><img src={pictureUrl}/></div>
+      </div>
+      <button onclick={connectedCallback}>Click Me</button>
+      <!-- Neutral variant (default) -->
+      <lightning-button label="Neutral" title="Non-primary action" onclick={connectedCallback} class="slds-m-left_x-small"></lightning-button>
+      </div>
+    </lightning-card>
+    
+
+  </template>

@@ -1,0 +1,56 @@
+<template >
+    <div>
+        <lightning-card title="Test para logs de Avalara">
+            <div class="slds-var-m-around_medium">
+                <template if:true={isError}>
+                    <div>{errorMessage}</div>
+                </template>
+            </div>
+                <lightning-datatable
+                class=""
+                    key-field="Id"
+                    data={data}
+                    columns={columns}
+                    hide-checkbox-column></lightning-datatable>
+            
+        </lightning-card>
+
+        <lightning-card title="Test para logs de Avalara" class="slds-var-m-around_medium">
+            <div class="slds-var-m-around_medium">
+                <h1 class="slds-text-heading_small">Input Date Example</h1>
+                <p class="slds-text-body_regular">The following examples show various ways to create an input date component.</p>
+            </div>
+                <div class="slds-p-around_x-small">
+                    <h2>Select and StartDate and EndDate</h2>
+                    <!-- <lightning-input type="date" name="input1" label="Enter a date" ></lightning-input> -->
+                    <lightning-input id="startDate"  type="date" name="startdate" label="Start Date" value="2021-07-09" format="dd/MM/yyyy"></lightning-input>
+                    <lightning-input id="endDate" type="date" name="enddate" label="EndDate ISO8601" value="2021-07-09" format="dd/MM/yyyy"></lightning-input>
+                    <lightning-button onclick={handleClick} variant="brand" label="Brand" title="Primary action" class="slds-button slds-button_brand">Buscar</lightning-button>
+                    <br>
+                    <p> StartDate: {startDate} - EndDate: {endDate} </p>                    
+                    <!-- <lightning-input type="date" name="input4" label="Date field with placeholder" placeholder="type here..."></lightning-input> -->
+                </div>
+                <div>Respuesta avalara: {respuestaAvalara}</div>
+            
+                <!-- <div>
+                    <h2>Advanced Input Date</h2>
+                    <lightning-input type="date" name="input5" label="Required date field" required value="2020-09-07" ></lightning-input>
+                    <lightning-input type="date" name="input6" label="Read-only date field" readonly value="2020-09-07" ></lightning-input>
+                    <lightning-input type="date" name="input7" label="Disabled date field" disabled value="2020-09-07" ></lightning-input>
+                    <lightning-input type="date" name="input8" label="Date field with min and max values" value="2020-09-07" min="2020-09-05" max="2020-09-22" ></lightning-input>
+                </div> -->
+
+        </lightning-card>
+        <lightning-card title="Test JSON show" class="slds-var-m-around_medium" icon-name="custom:custom14">
+                
+                    <ul class="slds-var-m-around_medium">
+                        <template for:each={usuarios} for:item="usuario">
+                            <li key={usuario.Id}>
+                                {usuario.nombre}, {usuario.apellido}
+                            </li>
+                        </template>
+                    </ul>
+        </lightning-card>
+
+    </div>
+</template>

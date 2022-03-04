@@ -1,0 +1,17 @@
+<template>
+    <!-- apexWireMethodToProperty.html -->
+        <!-- <p>All categories</p>
+        <br> -->
+        <lightning-card title="Product Categories" icon-name="custom:custom63">
+            <div class="slds-var-m-around_medium">
+                <template if:true={allCategories.data}>
+                    <template for:each={allCategories.data} for:item="category">
+                        <p key={category.Id}>{category.Name}</p>
+                    </template>
+                </template>
+                <!-- <template if:true={category.error}>
+                    <c-error-panel errors={category.error}></c-error-panel>
+                </template> -->
+            </div>
+        </lightning-card>
+</template>

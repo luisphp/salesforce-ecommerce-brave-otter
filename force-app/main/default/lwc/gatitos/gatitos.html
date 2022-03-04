@@ -1,0 +1,95 @@
+<template>
+    <lightning-card title="App - Gatitos" class="slds-var-m-around_medium" icon-name="custom:custom14">
+        <div class="slds-var-m-around_medium">
+            <p class="slds-text-body_regular">The following app Request for all Cats / Breeds information</p>
+        </div>
+        <div class="slds-var-p-around_x-small">
+
+            <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center">
+                <div class="slds-size_2-of-3">
+            
+                    <lightning-input id="api_key"  type="text" name="api_key" plaeceholder="Your API Key here" value="api_key"></lightning-input>
+                </div>
+            
+            <div class="slds-col slds-size_1-of-3 ">
+
+                    <lightning-button onclick={searchHandleEvent} variant="brand" label="Search" title="Primary action" class="slds-button slds-button_brand slds-grid_vertical-align-end"></lightning-button>
+
+            </div>
+        </div>
+            <!-- <lightning-combobox
+            name="progress"
+            label="Status"
+            value={value}
+            placeholder="Select Progress"
+            options={options}
+            onchange={handleChange} ></lightning-combobox>
+
+            <p>Selected value is: {value}</p>
+            <p>Actual api key: {apiKey}  </p> -->
+
+            <!-- Loading indicator / Spinner -->
+            <template if:true={showSpinner}>
+                <div class="exampleHolder">
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Combobox/Select breeds -->
+            <template if:true={successResponse} class="slds-var-m-top_medium">
+                <lightning-combobox
+                class="slds-var-m-top_medium"
+                name="Breed"
+                label="Select a Breed to see the cat details"
+                value={valueBreed}
+                placeholder="Select a Breed"
+                options={picklistBreeds}
+                onchange={handleChange} ></lightning-combobox>
+
+                <!-- <p>Actual api key: {apiKey}  </p>
+                <p>Breed Selected: {valueBreed}  </p> -->
+
+            </template>
+
+            <!-- Error message view -->
+            <template if:true={errorOnCallOut} >
+                <div class="slds-var-m-top_medium slds-text-heading_large slds-p-left_medium"> API error, please try again.</div>
+            </template>
+
+            <!-- Breed Details view -->
+            <template if:true={showBreedDetails}>
+                <div class="slds-grid slds-gutters slds-var-m-top_x-large">
+                    <div class="slds-col">
+                                <!-- <div class="slds-text-heading_medium">Title</div> -->
+                                <div class="slds-text-heading_large slds-p-left_medium">{breedSelectedName}</div>
+
+                        <div class="slds-text-heading_medium slds-var-m-top_medium slds-p-left_medium">Description:</div>
+                        <div class="slds-text-heading_small slds-p-left_medium">  {breedSelectedDescription} </div>
+                    </div>
+                    <div class="slds-col ">
+                        <!-- <div class="slds-text-heading_medium">Image</div> -->
+                        <img src={breedSelectedImage} class="slds-card">
+                    </div>
+                    <!-- <div class="slds-col">
+                      <span>3</span>
+                    </div> -->
+                  </div>
+            </template>
+
+
+        </div>
+        <!-- <div class="slds-grid slds-gutters">
+            <div class="slds-size_2-of-3">
+                <lightning-input id="api_key_two"  type="text" name="api_key" label="Here your API key" value="api_key"></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-button onclick={searchHandleEvent} variant="brand" label="Search" title="Primary action" class="slds-button slds-button_brand"></lightning-button>
+            </div>
+          </div> -->
+    </lightning-card>
+
+
+
+
+
+</template>
